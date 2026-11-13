@@ -1,0 +1,1 @@
+define view entity ZC_ITEM as select from zt2 as i { key i.k as K }

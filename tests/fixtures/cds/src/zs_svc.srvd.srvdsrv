@@ -1,0 +1,1 @@
+define service zs_svc { expose zc_view as View; expose zi_ghost as Ghost; expose zi_twice as Twice; }

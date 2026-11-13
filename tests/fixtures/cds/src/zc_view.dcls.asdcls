@@ -1,0 +1,3 @@
+define role zc_other {
+  grant select on zi_toone where (bukrs) = aspect pfcg_auth(f_bkpf_buk, bukrs, actvt = '02');
+}

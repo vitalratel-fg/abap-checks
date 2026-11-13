@@ -1,0 +1,12 @@
+CLASS zcl_store DEFINITION PUBLIC.
+  PUBLIC SECTION.
+    METHODS constructor IMPORTING io_luw TYPE REF TO zif_luw OPTIONAL.
+    METHODS build.
+ENDCLASS.
+CLASS zcl_store IMPLEMENTATION.
+  METHOD constructor.
+  ENDMETHOD.
+  METHOD build.
+    DATA(lo) = NEW zcl_repo( ).
+  ENDMETHOD.
+ENDCLASS.

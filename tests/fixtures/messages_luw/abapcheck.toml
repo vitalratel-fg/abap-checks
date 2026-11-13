@@ -1,0 +1,31 @@
+[luw]
+owners = ["zcl_unit"]
+synchronous = ["zcl_sync"]
+forbidden_on_sync = ["SAP_WAPI_CREATE_EVENT"]
+
+[luw.inject]
+interface = "zif_luw"
+builds = 'zcl_\w+'
+forwarders = '_service$'
+
+[messages.buffer]
+inject = "io_msg"
+exporting = "et_messages"
+export = 'et_messages = _mo_msg->get\( \)'
+
+[[meta.msgclass]]
+name = "ZX"
+text = "X"
+messages = [["001", "One &1"], ["002", "Two &1 &2"]]
+
+[meta]
+package = "Demo"
+[meta.classes]
+zcl_unit = "Unit"
+zcl_sync = "Sync"
+zcl_repo = "Repo"
+zcl_store = "Store"
+zcl_a_service = "A"
+zcl_b_service = "B"
+zcl_msg = "Msg"
+zcl_collect = "Collect"

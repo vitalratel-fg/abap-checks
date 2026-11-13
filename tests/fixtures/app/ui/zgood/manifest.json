@@ -1,0 +1,88 @@
+{
+  "sap.app": {
+    "id": "zgood",
+    "dataSources": {
+      "mainService": {
+        "uri": "/sap/opu/odata4/sap/zsb_x/srvd/sap/zsd_x/0001/",
+        "settings": {
+          "odataVersion": "4.0"
+        }
+      }
+    }
+  },
+  "sap.ui5": {
+    "dependencies": {
+      "minUI5Version": "1.120.0"
+    },
+    "models": {
+      "i18n": {
+        "settings": {
+          "bundleName": "zgood.i18n.i18n"
+        }
+      }
+    },
+    "routing": {
+      "routes": [
+        {
+          "name": "list",
+          "target": "List"
+        },
+        {
+          "name": "obj",
+          "target": "Obj"
+        }
+      ],
+      "targets": {
+        "List": {
+          "name": "sap.fe.templates.ListReport",
+          "options": {
+            "settings": {
+              "contextPath": "/Root",
+              "initialLoad": "Disabled",
+              "navigation": {
+                "Root": {
+                  "detail": {
+                    "route": "obj"
+                  }
+                }
+              },
+              "views": {
+                "paths": [
+                  {
+                    "key": "t1",
+                    "annotationPath": "com.sap.vocabularies.UI.v1.SelectionVariant#Open"
+                  },
+                  {
+                    "key": "t2",
+                    "entitySet": "Item",
+                    "annotationPath": "com.sap.vocabularies.UI.v1.LineItem"
+                  }
+                ]
+              },
+              "controlConfiguration": {
+                "@com.sap.vocabularies.UI.v1.LineItem": {
+                  "tableSettings": {
+                    "type": "GridTable"
+                  }
+                },
+                "/Root/_Items/@com.sap.vocabularies.UI.v1.LineItem": {
+                  "tableSettings": {
+                    "type": "GridTable"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "Obj": {
+          "name": "sap.fe.templates.ObjectPage",
+          "options": {
+            "settings": {
+              "contextPath": "/Root"
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "sap.app": {
+    "id": "zraw",
+    "dataSources": {
+      "mainService": {
+        "uri": "/sap/opu/odata/sap/ZX_SRV/"
+      }
+    }
+  }
+}

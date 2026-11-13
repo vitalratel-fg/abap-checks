@@ -1,0 +1,4 @@
+annotate entity ZC_ITEM with {
+  @UI.lineItem: [{ position: 10 }]
+  K;
+}

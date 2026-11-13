@@ -1,0 +1,1 @@
+define service ZSD_X { expose ZC_ROOT as Root; expose ZC_ITEM as Item; }

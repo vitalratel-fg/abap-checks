@@ -1,0 +1,4 @@
+INTERFACE zif_q PUBLIC.
+  METHODS by_name.
+  METHODS needs zif_a.
+ENDINTERFACE.

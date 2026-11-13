@@ -1,0 +1,61 @@
+[[ddic.domain]]
+name = "ZV_STATE"
+type = "CHAR"
+length = 1
+text = "State"
+
+[[ddic.element]]
+name = "ZV_STATE"
+domain = "ZV_STATE"
+short = "State"
+medium = "State"
+long = "State"
+
+[[ddic.element]]
+name = "ZV_AMOUNT"
+type = ["CURR", 11, 2]
+short = "Amount"
+medium = "Amount"
+long = "Amount"
+
+[[ddic.element]]
+name = "ZV_STD_DOMAIN"
+domain = "WAERS"
+short = "Currency"
+medium = "Currency"
+long = "Currency"
+
+[[ddic.element]]
+name = "ZV_AN_ELEMENT_NAME_LONGER_THAN_30"
+type = ["CHAR", 1]
+short = "Long"
+medium = "Long"
+long = "Long"
+
+[[ddic.table]]
+name = "ZV_T_NAME_TOO_LONG"
+delivery = "X"
+text = "Bad"
+fields = [["MANDT", "MANDT", true], ["STATE", "ZV_STATE", true],
+          ["AMT", "ZV_AMOUNT", false], ["AMT2", "ZV_AMOUNT", false, "STATE"],
+          ["CUR", "WAERS", false], ["AMT3", "ZV_AMOUNT", false, "CUR"],
+          ["ODD", "ZV_NOWHERE", false], ["CUR2", "ZV_STD_DOMAIN", false]]
+indexes = [["Z1", ["STATE"], false], ["Z02", ["MISSING"], false], ["Z03", ["STATE"], true]]
+
+[[ddic.table]]
+name = "ZV_T_OK"
+delivery = "A"
+text = "Fine"
+fields = [["MANDT", "MANDT", true], ["STATE", "ZV_STATE", true]]
+
+[[ddic.lock]]
+name = "EZV_GONE"
+table = "ZV_T_GONE"
+mode = "E"
+args = ["MANDT"]
+
+[[ddic.lock]]
+name = "EZV_OK"
+table = "ZV_T_OK"
+mode = "E"
+args = ["MANDT", "NOPE"]

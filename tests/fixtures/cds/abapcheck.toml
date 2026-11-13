@@ -1,0 +1,20 @@
+
+[package]
+own = "z\\w+"
+
+[cds]
+consumption = "zc_"
+filter_fields = ["companycode", "plant"]
+budget = 2
+forbidden_sources = ["acdoca"]
+legacy = "zv_old\\w*"
+abapfree = true
+
+[cds.names]
+ddls = "z[ic]_"
+
+[cds.mandatory]
+companycode = "single"
+
+[cds.keys]
+zt_two = ["a", "b"]

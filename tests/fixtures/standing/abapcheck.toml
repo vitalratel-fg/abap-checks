@@ -1,0 +1,7 @@
+[package]
+own = 'z\w+'
+objects = 'zc[lx]_\w+|zif_\w+'
+docs = ["docs/*.md"]
+
+[naming]
+retired = ['\bzcl_old\b']

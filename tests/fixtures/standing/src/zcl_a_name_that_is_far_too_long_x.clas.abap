@@ -1,0 +1,2 @@
+CLASS zcl_a_name_that_is_far_too_long_x DEFINITION PUBLIC.
+ENDCLASS.

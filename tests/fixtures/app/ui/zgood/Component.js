@@ -1,0 +1,1 @@
+return UIComponent.extend("zgood.Component", {});

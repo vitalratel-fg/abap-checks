@@ -1,0 +1,1 @@
+define table function zi_tf returns { k : abap.char(1); } implemented by method zcl_tf=>run;

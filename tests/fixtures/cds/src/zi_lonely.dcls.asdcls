@@ -1,0 +1,1 @@
+define role zi_lonely { grant select on zi_lonely; }

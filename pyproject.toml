@@ -1,0 +1,7 @@
+[project]
+name = "abap-checks"
+version = "0.1.0"
+description = "Static checks for ABAP and CDS packages kept in git in abapGit layout"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = []

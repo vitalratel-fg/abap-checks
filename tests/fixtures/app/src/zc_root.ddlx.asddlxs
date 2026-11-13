@@ -1,0 +1,5 @@
+annotate entity ZC_ROOT with {
+  @UI.lineItem: [{ position: 10 }]
+  @UI.selectionVariant: [{ qualifier: 'Open', text: 'Open' }]
+  K;
+}

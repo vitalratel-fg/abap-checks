@@ -1,0 +1,13 @@
+[[ddic.element]]
+name = "ZI_AMOUNT"
+type = ["CURR", 11, 2]
+short = "Amt"
+medium = "Amt"
+long = "Amount"
+
+[[ddic.table]]
+name = "ZI_T"
+delivery = "A"
+text = "With <indexes> & refs"
+fields = [["MANDT", "MANDT", true], ["CUR", "WAERS", true], ["AMT", "ZI_AMOUNT", false, "CUR"]]
+indexes = [["Z01", ["CUR", "AMT"], false], ["Z02", ["AMT"], true]]

@@ -1,0 +1,8 @@
+
+[app]
+table_type = "GridTable"
+initial_load = "Disabled"
+max_ui5 = "1.120"
+
+[register]
+file = "register.md"

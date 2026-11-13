@@ -1,0 +1,1 @@
+define service zs_a_service_name_longer_than_30 { }

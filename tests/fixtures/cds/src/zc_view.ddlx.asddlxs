@@ -1,0 +1,5 @@
+@Metadata.layer: #CUSTOMER
+annotate entity zc_view with {
+  @UI.facet: [{ type: #LINEITEM_REFERENCE, targetElement: '_One' }]
+  K;
+}

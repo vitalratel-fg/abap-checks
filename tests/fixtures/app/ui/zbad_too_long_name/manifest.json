@@ -1,0 +1,89 @@
+{
+  "sap.app": {
+    "id": "zbad",
+    "dataSources": {
+      "mainService": {
+        "uri": "/sap/opu/odata4/sap/zsb_y/srvd/sap/zsd_x/0001/",
+        "settings": {
+          "odataVersion": "2.0"
+        }
+      }
+    }
+  },
+  "sap.ui5": {
+    "dependencies": {
+      "minUI5Version": "1.130.0"
+    },
+    "models": {
+      "i18n": {
+        "settings": {
+          "bundleName": "wrong.bundle"
+        }
+      }
+    },
+    "routing": {
+      "routes": [
+        {
+          "name": "list",
+          "target": "List"
+        },
+        {
+          "name": "obj",
+          "target": "Obj"
+        }
+      ],
+      "targets": {
+        "List": {
+          "name": "sap.fe.templates.ListReport",
+          "options": {
+            "settings": {
+              "contextPath": "/Root",
+              "initialLoad": "Auto",
+              "navigation": {
+                "Root": {
+                  "detail": {
+                    "route": "nope"
+                  }
+                }
+              },
+              "views": {
+                "paths": [
+                  {
+                    "key": "t1",
+                    "annotationPath": "com.sap.vocabularies.UI.v1.SelectionVariant#Closed"
+                  },
+                  {
+                    "key": "t2",
+                    "entitySet": "Nowhere",
+                    "annotationPath": "com.sap.vocabularies.UI.v1.Chart"
+                  }
+                ]
+              },
+              "controlConfiguration": {
+                "@com.sap.vocabularies.UI.v1.LineItem": {
+                  "tableSettings": {
+                    "type": "ResponsiveTable"
+                  }
+                },
+                "/Root/_Missing/@com.sap.vocabularies.UI.v1.LineItem": {
+                  "tableSettings": {
+                    "type": "GridTable"
+                  }
+                },
+                "bogus": {}
+              }
+            }
+          }
+        },
+        "Obj": {
+          "name": "sap.fe.templates.ObjectPage",
+          "options": {
+            "settings": {
+              "contextPath": "/Root"
+            }
+          }
+        }
+      }
+    }
+  }
+}

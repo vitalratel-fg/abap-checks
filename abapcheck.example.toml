@@ -1,0 +1,158 @@
+# abapcheck.toml -- what a project tells the checks about itself.
+#
+# Every key is optional. Without a key, a check that needs it prints `--`
+# with the key's name, never `ok`. Paths are relative to this file's folder
+# (or to [package] base). Regexes are TOML literal strings ('...'): no
+# escaping, and matched case-insensitively unless a check says otherwise.
+
+[package]
+# base = "../project"        # the project folder, when this file lives elsewhere
+# root = "src"               # default: .abapgit.xml STARTING_FOLDER, else src
+devc = "z_my_package"        # root ABAP package, for the register's package names
+own = 'z(?:[a-z]{1,2}_)?my(?:_[a-z0-9_]*[a-z0-9])?'   # every object the package owns
+objects = 'z(?:cl|if|cx)_my(?:_[a-z0-9_]*[a-z0-9])?'  # ABAP objects source can name (undrafted)
+docs = ["docs/*.md"]         # documents `renamed` reads besides the source
+# ui = "ui"                  # UI5 apps: one folder per BSP application
+
+[checks]
+# Conventions to turn off: a bare name in every script, `script.check` in one.
+off = []                     # e.g. ["loops", "cds.distinct", "standing.methodnames"]
+
+[naming]
+# type_public = "mty_"       # defaults: the house convention
+# type_private = "_mty_"
+# method_private = "_"
+retired = [                  # names that must not come back, as regexes
+  '\bzcl_my_old_name\b',
+]
+
+[register]
+# The document that names every object; `register` compares it with disk.
+file = "docs/naming.md"
+# names = '`(Z\w+)`'         # group 1 = a name; default: backticked [package] own
+planned_ignore = '^ez'       # register names never expected on disk
+
+# [[register.subset]]        # another document's list that must reach the register
+# label = "Tables"
+# file = "docs/architecture.md"
+# section = '^## \d+\. Tables\n'
+# names = '^\| `(ZT_\w+)`'
+
+[luw]
+owners = ["zcl_my_luw"]      # the classes that may COMMIT / ROLLBACK WORK
+# synchronous = ["zcl_my_step"]                # objects running in a caller's LUW
+# synchronous_methods = { zcl_my_mixed = ["on_save"] }
+# forbidden_on_sync = ["sap_wapi_create_event", "sap_wapi_start_workflow"]
+
+# [luw.inject]               # the LUW chosen by whoever assembles the objects
+# interface = "zif_my_luw"
+# param = "io_luw"
+# builds = 'zcl_my_\w+'
+# forwarders = '_(service|repo|gw)$'           # classes that must take and pass it on
+
+[messages]
+# classes = ["zmy"]          # default: every *.msag.xml under the root
+# [messages.pre_existing]    # numbers in a class this package does not own
+# zother = ["001", "002"]
+# [messages.buffer]          # a message buffer injected or returned, not both
+# inject = "io_msg"
+# exporting = "et_messages"
+# export = 'et_messages\s*=\s*_mo_msg->get\(\s*\)'
+
+[stubs]
+blockers = '\bOPEN-(\d+(?:[a-z]\b)?)'          # how the project cites an open point
+
+# [clobbered]
+# carrier = '_?[rcilm][st]_\w+'                # structures whose writes are tracked
+
+# [model]                    # check_model_writers: every model field has a writer
+# interface = "zif_my_types"
+# dictwriters = [["zcl_my_labels", "'(\\w+)'", "mty_doc"]]
+
+[cds]
+consumption = 'zc_my_'       # consumption views (mde, elements, mandatory)
+# budget = 40                # data-source references an exposed view may expand to
+# filter_fields = ["companycode", "fiscalyear"]
+# forbidden_sources = ["ausp", "mbv_mbew"]
+# legacy = 'ZI_OLD_\w+|ZC_OLD_\w+'
+# abapfree = true            # no custom entity, virtual element, AMDP, BDEF
+# dcl_actvt = "03"           # the ACTVT access controls must ask for; "" for any
+
+# [cds.names]
+# ddls = 'z[ic]_my_\w+$'
+# srvd = 'zsd_my_'
+
+# [cds.mandatory]            # element = selection type, "" for any
+# companycode = ""
+# fiscalyear = "#single"
+# [cds.mandatory_override.zc_my_stock]
+# fiscalyear = "#interval"
+
+# [cds.keys]                 # keys of `to one` targets beyond _sap.KEYS (from SE11)
+# i_mytarget = ["key1", "key2"]
+
+# [cds_sources]              # cds_sources.py: where a legacy stack lives
+# views = "legacy/cds_views"
+# amdp = "legacy/classes"
+
+[app]
+# max_ui5 = "1.120"          # the system's UI5: minUI5Version may not exceed it
+# table_type = "GridTable"
+# initial_load = "Disabled"
+
+# ---------------------------------------------------------------------------
+# Generators: make_ddic.py / make_meta.py write the abapGit XML from these.
+# ---------------------------------------------------------------------------
+
+# [[ddic.domain]]
+# name = "ZMY_STATE"
+# type = "CHAR"
+# length = 1
+# text = "Processing state"
+# values = [["O", "Open"], ["D", "Done"]]
+
+# [[ddic.element]]
+# name = "ZMY_STATE"
+# domain = "ZMY_STATE"       # or: type = ["CURR", 11, 5]
+# short = "State"
+# medium = "State"
+# long = "Processing state"
+
+# [[ddic.table]]
+# name = "ZMY_T_DOC"
+# delivery = "A"
+# text = "Documents"
+# fields = [
+#   ["MANDT", "MANDT", true],
+#   ["DOCID", "SYSUUID_X16", true],
+#   ["STATE", "ZMY_STATE", false],
+# ]
+# indexes = [["Z01", ["STATE"], false]]
+
+# [ddic.standard]            # SAP data elements beyond _sap.STANDARD
+# USMD_CREQUEST = ["CHAR", 12, 0]
+
+# [meta]
+# package = "My package"
+# [meta.classes]
+# zcl_my_x = "What it does"
+# [meta.exceptions]
+# zcx_my = "My package exception"
+# [meta.interfaces]
+# zif_my_x = "What it promises"
+# [meta.programs]
+# zmy_r_job = "Title"
+# [[meta.msgclass]]
+# name = "ZMY"
+# text = "My package"
+# messages = [["001", "Document &1 not found"]]
+
+# ---------------------------------------------------------------------------
+# Suppressions: a known-good finding, matched EXACTLY, with why someone looked.
+# One that excuses nothing on a full run is a finding of its own.
+# [suppress.<script>.<check>]  scripts: standing design cds app luw messages
+#   bare_bool clobbered sorted_rows model_writers
+# ---------------------------------------------------------------------------
+
+# [suppress.standing.orphans]
+# "zif_my_badi.execute" = "called by the BAdI framework, not by this package"
